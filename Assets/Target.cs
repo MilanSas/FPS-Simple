@@ -34,12 +34,18 @@ public class Target : MonoBehaviour
     {
         score = 0;
 
-        if (HitTarget)
+
+        if(distance < 20f)
         {
             score += 100;
         }
 
-        score += 100 - distance;
+        if (!HitTarget)
+        {
+            score -= 100;
+        }
+
+        score += 75 - distance;
 
         return score;
     }

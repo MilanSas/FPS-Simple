@@ -40,8 +40,8 @@ public class GunAgent : Agent
 
     public override void CollectObservations()
     {
-        AddVectorObs((((_target.transform.position.z - 50) / 50) * 2) - 1);
-        AddVectorObs((((_target.transform.position.y - 25) / 25) * 2) - 1);
+        AddVectorObs((((_target.transform.position.z - 50) / 200) * 2) - 1);
+        //AddVectorObs((((_target.transform.position.y - 25) / 25) * 2) - 1);
     }
 
 
@@ -61,6 +61,7 @@ public class GunAgent : Agent
 
     public void Shoot(float rotation, float power)
     {
+        Debug.Log("Distance target" + ((((_target.transform.position.z - 50) / 200) * 2) - 1));
         _nextFire = Time.time + _fireRate;
         transform.rotation = Quaternion.Euler(rotation, 0, 0);
         
@@ -70,7 +71,7 @@ public class GunAgent : Agent
     }
     public override void AgentReset()
     {
-        _target.SetPosition(new Vector3(0, Random.Range(25f, 50.0f), Random.Range(50f, 100.0f)));
+        _target.SetPosition(new Vector3(0, 25, Random.Range(50f, 250f)));
         _target.ResetScore();
         shot = false;
     }
@@ -81,8 +82,8 @@ public class GunAgent : Agent
        
         if (Input.GetKey(KeyCode.Space))
         {
-            action[0] = (0);//Random.value * 2 -1);
-            action[1] = (0);//Random.value * 2 -1);
+            action[0] = (Random.value * 2 -1);
+            action[1] = (Random.value * 2 -1);
         }
 
         return action;
